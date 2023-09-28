@@ -286,7 +286,8 @@ function Write_Config(){
     $o_config['Login'] = 'login'; //登录入口
     $o_config['Register'] = 'register'; //注册入口
     $o_config['RegOption'] = '0'; //注册配置
-    $o_config['Libs'] = './static'; //静态库路径
+
+    $o_config['Libs'] = './static/'; //静态库路径
     $o_config['Default_User'] = $_POST['User']; //默认用户
     $o_config['XSS_WAF'] = '0'; //防XSS脚本
     $o_config['SQL_WAF'] = '0'; //防SQL注入
@@ -294,9 +295,11 @@ function Write_Config(){
     $o_config['Debug']   = '0'; //调试模式
     $o_config['Maintenance'] = '0'; //维护模式
     $o_config['Sub_domain'] = '0'; //二级域名
-    $o_config['copyright'] = ''; //版权信息
+    $o_config['copyright'] = ''; //开启版权信息
     $o_config['c_code'] = '0'; //禁用默认用户使用自定义代码
-    
+	$o_config['guestbook'] = '1'; //开启留言本
+	$o_config['apply'] = '1'; //开启网站提交
+	$o_config['article'] = '1'; //开启文章
     insert_db("global_config", ["k" => "o_config","v" => $o_config,"d" => '网站配置']);  
     
     //读取信息(注册后默认已经登录)
