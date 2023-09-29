@@ -1,4 +1,8 @@
 <?php 
+if($global_config['guestbook'] != 1 || !check_purview('guestbook',1)){
+    require(DIR.'/templates/admin/page/404.php');
+    exit;
+}
 
 $s = unserialize( get_db("user_config", "v", ["k" => "guestbook","uid"=>UID]) );
 if(empty($s)){
@@ -136,11 +140,24 @@ $('.click').click(function (event) {
 });
 
 function del(name) {
-    Authorization_Prompt();
+    $.post('',{'type':'del','name':name},function(data,status){
+        if(data.code == 1) {
+            layer.msg("删除成功", {icon: 1});
+            setTimeout(() => {location.reload();}, 500);
+        }else{
+            layer.msg(data.msg, {icon: 5});
+        }
+    });
 }
    
 function set(key){
-    Authorization_Prompt();
+    $.post('',{'type':'set','set':key},function(data,status){
+        if(data.code == 1) {
+            location.reload();
+        }else{
+            layer.msg(data.msg, {icon: 5});
+        }
+    });
 }
 
 </script>
